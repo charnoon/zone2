@@ -1,0 +1,472 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Crossing</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	
+<link href="font.css" rel="stylesheet">
+	<style>
+		
+		html, body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Favorit';
+			overflow: hidden;
+	
+			color: #FFF;
+			position: relative;
+			-webkit-font-smoothing : antialiased;
+			background-color: black;
+			
+		}
+		
+		h1 {
+			all: initial;
+			font-size: 3vw;
+			line-height: 1;
+			font-family: Favorit;
+			color: #FFF;
+			pointer-events: all;
+		}
+		
+		.content {
+			position: relative;
+			width: 90%;
+				height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+		  height: calc(var(--vh, 1vh) * 100);
+			/*max-width: 1728px;*/
+			margin: 0 auto;
+	
+			display: flex;
+			align-items: center;
+			
+			font-size: 3vw;
+			line-height: 1;
+			z-index: 10;
+			
+			pointer-events: none;
+		}
+		
+
+		
+		.col-header {
+			width: calc((100% / 9) * 2);
+			position: absolute;
+			opacity: 1;
+			transition: opacity 0.5s 0.6s;
+		}
+		
+		html.about-open .col-header {
+			opacity: 0;
+			transition: opacity 0.5s;
+		}
+		
+		
+		
+		.col-content {
+			width: calc((100% / 9) * 8);
+		}
+		
+		.col-cta {
+			width: calc((100% / 9) * 1);
+			line-height: 0;
+			text-align: right;
+		}
+		
+		.cta {
+			font-size: 16px;
+			border: 1px solid #FFF;
+			display: inline-block;
+			border-radius: 50px;
+			height: 2.291666667vw;
+			line-height:  2.4vw;
+			padding: 0 1vw;
+			pointer-events: all;
+			cursor: pointer;
+		}
+		
+		.cta:hover {
+			background-color: #FFF;
+			color: #000;
+		}
+		
+		canvas {
+			position: absolute;
+			top: 0; 
+			left: 0;
+			display: block;
+    position: absolute;
+			tranform: translate(-50%, -50%) scale(1.2);
+			animation: fade-in 2s;
+			transition: filter 1s;
+			filter: blur(0);
+		}
+		
+		html.about-open canvas {
+			filter: blur(20px);
+		}
+		
+		@keyframes fade-in {
+			0%{opacity: 0;}
+			100% {opacity: 1;}
+		}
+		
+		.text {
+			opacity: 0;
+			transition: opacity 0.5s 0s;
+		}
+		
+		html.about-open .text {
+			opacity: 1;
+			transition: opacity 0.5s 0.5s;
+		}
+		
+		.newsletter {
+			font-size: 16px;
+			margin-top: 2.291666667vw;
+			opacity: 0;
+			transition: opacity 1s 0s;
+		}
+		
+		html.about-open .newsletter {
+			opacity: 1;
+			transition: opacity 1s 0.7s;
+		}
+		
+		input {
+			all: initial;
+			border: 1px solid #FFF;
+					pointer-events: all;
+						height: 2.291666667vw;
+			line-height:  2.4vw;
+						font-family: Favorit;
+			color: #FFF;
+			border-radius: 50px;
+			font-size: 16px;
+			font-weight: 100;
+			-webkit-font-smoothing : antialiased;
+			padding: 0 1vw;
+			margin-left: 10px;
+		}
+		
+#crossing-validate {
+
+					pointer-events: all;
+						height: 2.291666667vw;
+			line-height:  2.4vw;
+		border: 1px solid transparent;
+	display: none;
+opacity: 0;
+			font-size: 16px;
+			font-weight: 100;
+transition: opacity 1s;
+		}
+		
+		html.email-submited #crossing-validate  {
+			opacity: 1;
+			display: inline;
+		}
+		
+			html.email-submited .form  {
+			display: none;
+		}
+		
+		
+		
+		::placeholder {
+		  color: rgba(255,255,255,0.5);
+		}
+		
+
+		input.submit {
+			background-color: white;
+			color: #000;
+			opacity: 0.2;
+			pointer-events: none;
+			
+		}
+		
+		input.submit.submitable {
+			opacity: 1;
+			pointer-events: all;
+		}
+		
+		form {
+			display: inline;
+		}
+		
+		.copyright {
+			position: absolute;
+bottom: 3vh;
+font-size: 12px;
+			opacity: 0;
+			transition: opacity 1s;
+		}
+		
+		html.about-open .copyright {
+			opacity: 1;
+				transition: opacity 1s 0.9s;
+		}
+		
+
+		
+		@media screen and (max-width: 1280px) {
+		  input, .newsletter, .cta {
+			font-size: 12px;
+		  }
+		}
+		
+		@media screen and (max-width: 728px) {
+		  .content {
+			flex-wrap: wrap;
+			  font-size: 6.4vw;
+			   align-items: flex-end;
+			  align-content: flex-end;
+				width: 100%;
+			  padding: 0 24px;
+			  bottom: 0;
+			  box-sizing: border-box;
+			  
+		  }					
+			
+			
+			input, .newsletter, .cta {
+			font-size: 16px;
+			margin-top: 0;
+		
+		  }
+			
+					  input {
+						  height: 10vw;
+						  line-height: 10vw;
+						  padding: 0 3.5vw;
+						  margin-left: 0;
+						  		margin-left: -4px;
+		  }
+			
+			#crossing-validate {
+					  height: 10vw;
+						  line-height: 10vw;
+			}
+			
+				input.submit {
+			margin-left: 10px;
+		}
+			
+			h1 {
+				font-size: 7vw;
+				margin-bottom: 7vw;
+				opacity: 0;
+				animation: fade-in 1s 0.8s forwards;
+			}
+			
+			.newsletter {
+				opacity: 0;
+				transition: none;
+				animation: fade-in 1s 1.6s forwards;
+			}
+			
+	
+			
+			.text {
+				opacity: 0;
+				margin-bottom: 7vw;
+				transition: none;
+				animation: fade-in 1s 1.2s forwards;
+			}
+			
+			.copyright {
+				opacity: 0;
+				transition: none;
+				animation: fade-in 1s 2s forwards;
+			}
+			
+			.col {
+				width: 100%;
+				margin-bottom: 7vw;
+			}
+			
+			.col-content {
+				margin-bottom: 64px;
+			}
+			
+			.col-cta {
+				display: none;
+
+			}
+			
+				form {
+			display: flex;
+				box-sizing: border-box;
+					margin-top: 3.5vw;
+		}
+			
+					.col-header {
+			opacity: 0;
+						display: none;
+	
+		}
+			
+					.copyright {
+bottom: 24px;
+font-size: 9px;
+		}
+			
+			
+		
+		}
+		
+		
+		
+		
+		
+	
+	</style>
+</head>
+
+
+<body>
+	<img src="img/water.jpg" class="slide-item__image" style="display: none;">
+	<div id="landing-crossing">
+		<div class="content">
+			<div class="col col-header">
+				<h1>CROSSING</h1>
+			</div>
+			<div class="col col-content">
+				<div class="text">
+					CROSSING: a platform merging cultures and industries through innate compassion and the mystique of the unknown. Ongoing collaborations in art, design, and experience engender a serene and intuitive creative response to evolving human desire. Every product represents a materialized analogue for personal actualization.
+				</div>
+				
+				<div class="newsletter">
+				<div class="form">				
+				Subscribe for updates
+					
+					
+				<iframe name="secret-frame" width="0" height="0" border="0" style="display: none;"></iframe>	
+
+				<form action="https://docs.google.com/forms/d/e/1FAIpQLSebPC0rSOs5fvffXl7iVuOGF9d3MmoS8P6wKG9g17qOBmh1ag/formResponse" target="secret-frame" method="POST" id="crossing-form" onsubmit="">
+					<input name="emailAddress" id="email" type="email" placeholder="Your email here" required>
+					<input id="crossing-submit" class="submit" type="submit" value="Go" >
+				</form>
+				</div>		
+					<div id="crossing-validate">Thank you very much.</div>
+				</div>
+				
+				<div class="copyright">
+				Copyright © Hao Wen Luo, Crossing Creatives Corp. 2019 | All Rights Reserved 
+				</div>
+			</div>
+			<div class="col col-cta">
+				<div class="cta">
+					About
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		
+	$(document).ready(function() {
+		  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+		
+			window.addEventListener('resize', () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+		
+    $('input#email').keydown(function(e) {
+        if (validateEmail($('#email').val())) {
+            $('#crossing-submit').addClass("submitable");
+        } else {
+			$('#crossing-submit').removeClass("submitable");
+		}
+    });
+		
+    $('input#email').change(function(e) {
+        if (validateEmail($('#email').val())) {
+            $('#crossing-submit').addClass("submitable");
+        } else {
+			$('#crossing-submit').removeClass("submitable");
+		}
+    });
+});
+
+var validateEmail = function(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};	
+		
+		$( "#crossing-submit" ).on( "click", function() {
+  $(this).parents('html').addClass('email-submited');
+			
+			
+			
+});
+		
+		
+		
+
+		
+				$( ".cta" ).on( "click", function() {
+			  $(this).parents('html').toggleClass('about-open');
+			
+	
+            $(this).text(function(i, v){
+               return v === 'Close' ? 'About' : 'Close'
+            });
+        });
+	
+	
+	</script>
+		<script src="js/demo.js"></script>
+		<script src="js/pixi.min.js"></script>
+		<script src="js/TweenMax.min.js"></script>
+		<script src="js/main5.js"></script>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="https://pixijs.download/dev/pixi.js.map"></script>
+	<script>
+		
+		
+
+		
+		
+			imagesLoaded(document.body, () => document.body.classList.remove('loading'));
+			
+			var spriteImages = document.querySelectorAll( '.slide-item__image' );
+			var spriteImagesSrc = [];
+			var texts = [];
+
+			for ( var i = 0; i < spriteImages.length; i++ ) {
+				var img = spriteImages[i];
+				// Set the texts you want to display to each slide 
+				// in a sibling element of your image and edit accordingly
+				if ( img.nextElementSibling ) {
+					texts.push(img.nextElementSibling.innerHTML);
+				} else {
+					texts.push('');
+				}
+				spriteImagesSrc.push( img.getAttribute('src' ) );
+			}
+      
+			var initCanvasSlideshow = new CanvasSlideshow({
+				sprites: spriteImagesSrc,
+				displacementImage: 'img/clouds.jpg',
+				autoPlay: true,
+				autoPlaySpeed: [4, 3],
+				displaceScale: [5000, 10000],
+				interactive: true,
+				interactionEvent: 'both', // 'click', 'hover', 'both' 
+				displaceAutoFit: false,
+				dispatchPointerOver: true // restarts pointerover event after click 
+			});
+		</script>
+	
+</body>
+	
+</html>
